@@ -1,23 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const HeaderTabs = () => {
+  const [activeTab, setActiveTab] = useState("Delivery");
+
   return (
     <View style={styles.container}>
-      <HeaderButton text="Delivery" btnColor="black" />
-      <HeaderButton text="Pickup" btnColor="white" />
+      <HeaderButton
+        text="Delivery"
+        btnColor="black"
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+      <HeaderButton
+        text="Pickup"
+        btnColor="white"
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
     </View>
   );
 };
 
-const HeaderButton = ({ text, btnColor }) => {
+const HeaderButton = ({ text, btnColor, activeTab, setActiveTab }) => {
+  const isActive = activeTab === text;
   return (
-    <TouchableOpacity style={[styles.button, { backgroundColor: btnColor }]}>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        {
+          backgroundColor: isActive ? "black" : "white",
+        },
+      ]}
+      onPress={() => setActiveTab(text)}
+    >
       <Text
-        style={[
-          styles.textButton,
-          { color: btnColor === "black" ? "white" : "black" },
-        ]}
+        style={[styles.textButton, { color: isActive ? "white" : "black" }]}
       >
         {text}
       </Text>
