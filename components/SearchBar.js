@@ -3,11 +3,17 @@ import React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { G_MAP_API } from "@env";
 
-export default function SearchBar() {
+export default function SearchBar({ city, cityHandler }) {
   return (
     <View style={{ marginTop: 15, flexDirection: "row" }}>
       <GooglePlacesAutocomplete
+        query={{ key: G_MAP_API }}
+        onPress={(data, details = null) => {
+          const city = data.description.split(",")[0];
+          cityHandler(city);
+        }}
         placeholder="Search"
         styles={{
           textInput: {
@@ -45,7 +51,7 @@ export default function SearchBar() {
               size={11}
               style={{ marginRight: 6 }}
             />
-            <Text>Search</Text>
+            <Text>{city}</Text>
           </View>
         )}
       />

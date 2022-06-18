@@ -9,11 +9,12 @@ import { localRestaurants } from "../components/RestaurantItem";
 import { YELP_API_KEY } from "@env";
 
 const Home = () => {
-  [restaurantsData, setRestaurantsData] = useState(localRestaurants);
+  const [restaurantsData, setRestaurantsData] = useState(localRestaurants);
+  const [city, setCity] = useState("San Francisco");
+  const [activeTab, setActiveTab] = useState("Delivery");
 
   const getRestaurantsFromYelp = () => {
-    const yelpURL =
-      "https://api.yelp.com/v3/businesses/search?term=restaurants&location=LosAngeles";
+    const yelpURL = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
 
     const apiOptions = {
       headers: {
@@ -22,18 +23,24 @@ const Home = () => {
     };
     return fetch(yelpURL, apiOptions)
       .then((res) => res.json())
-      .then((json) => setRestaurantsData(json.businesses));
+      .then((json) =>
+        setRestaurantsData(
+          json.businesses.filter((business) =>
+            business.transactions.includes(activeTab.toLowerCase())
+          )
+        )
+      );
   };
 
   useEffect(() => {
     getRestaurantsFromYelp();
-  }, []);
+  }, [city, activeTab]);
 
   return (
     <SafeArea>
       <View style={{ backgroundColor: "white", padding: 15 }}>
-        <HeaderTabs />
-        <SearchBar />
+        <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        <SearchBar city={city} cityHandler={setCity} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />

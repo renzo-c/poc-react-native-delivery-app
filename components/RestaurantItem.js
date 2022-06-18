@@ -69,7 +69,7 @@ const RestaurantInfo = ({ name, rating }) => (
     </View>
     <View
       style={{
-        backgroundColor: "#eee",
+        backgroundColor: "#CDCCCD",
         height: 30,
         width: 30,
         alignItems: "center",

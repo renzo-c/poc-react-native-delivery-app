@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const HeaderTabs = () => {
-  const [activeTab, setActiveTab] = useState("Delivery");
-
+const HeaderTabs = ({ activeTab, setActiveTab }) => {
   return (
     <View style={styles.container}>
       <HeaderButton
