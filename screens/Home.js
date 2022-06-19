@@ -7,6 +7,8 @@ import SafeArea from "../components/SafeArea";
 import SearchBar from "../components/SearchBar";
 import { localRestaurants } from "../components/RestaurantItem";
 import { YELP_API_KEY } from "@env";
+import { Divider } from "react-native-elements";
+import BottomTabs from "../components/BottomTabs";
 
 const Home = () => {
   const [restaurantsData, setRestaurantsData] = useState(localRestaurants);
@@ -46,6 +48,8 @@ const Home = () => {
         <Categories />
         <RestaurantItem restaurantsData={restaurantsData} />
       </ScrollView>
+      <Divider width={1}/>
+      <BottomTabs />
     </SafeArea>
   );
 };
