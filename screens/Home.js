@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
-import Categories from "../components/Categories";
-import HeaderTabs from "../components/HeaderTabs";
-import RestaurantItem from "../components/RestaurantItem";
-import SafeArea from "../components/SafeArea";
-import SearchBar from "../components/SearchBar";
-import { localRestaurants } from "../components/RestaurantItem";
+import Categories from "../components/home/Categories";
+import HeaderTabs from "../components/home/HeaderTabs";
+import RestaurantItem from "../components/home/RestaurantItem";
+import SafeArea from "../components/home/SafeArea";
+import SearchBar from "../components/home/SearchBar";
+import { localRestaurants } from "../components/home/RestaurantItem";
 import { YELP_API_KEY } from "@env";
 import { Divider } from "react-native-elements";
-import BottomTabs from "../components/BottomTabs";
+import BottomTabs from "../components/home/BottomTabs";
 
 const Home = () => {
   const [restaurantsData, setRestaurantsData] = useState(localRestaurants);
@@ -48,7 +48,7 @@ const Home = () => {
         <Categories />
         <RestaurantItem restaurantsData={restaurantsData} />
       </ScrollView>
-      <Divider width={1}/>
+      <Divider width={1} />
       <BottomTabs />
     </SafeArea>
   );
