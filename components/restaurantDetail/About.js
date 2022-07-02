@@ -10,13 +10,13 @@ const yelpRestaurantInfo = {
   categories: [{ title: "Thai" }, { title: "Comfort Food" }],
 };
 
-const { name, image, price, reviews, rating, categories } = yelpRestaurantInfo;
-const formattedCategories = categories.map((cat) => cat.title).join(" • ");
-const description = `${formattedCategories} ${
-  price ? " • " + price : ""
-} • 🎫 • ${rating} ⭐ (${reviews})`;
+export default function About({ route }) {
+  const { name, image, price, reviews, rating, categories } = route.params;
+  const formattedCategories = categories.map((cat) => cat.title).join(" • ");
+  const description = `${formattedCategories} ${
+    price ? " • " + price : ""
+  } • 🎫 • ${rating} ⭐ (${reviews})`;
 
-export default function About() {
   return (
     <View>
       <RestaurantImage image={image} />
