@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { Divider } from "react-native-elements/dist/divider/Divider";
 import SafeArea from "../components/home/SafeArea";
 import About from "../components/restaurantDetail/About";

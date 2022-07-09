@@ -11,18 +11,20 @@ let cartReducer = (state = defaultState, action) => {
       let newState = { ...state };
       if (action.payload.checkboxValue) {
         newState.selectedItems = {
-          items: [newState.selectedItems.items, action.payload],
+          items: [...newState.selectedItems.items, action.payload],
           restaurantName: action.payload.restaurantName,
         };
       } else {
         newState.selectedItems = {
-          items: newState.selectedItems.items.filter(
-            (item) => item.title !== action.payload.title
-          ),
+          items: [
+            ...newState.selectedItems.items.filter(
+              (item) => item.title !== action.payload.title
+            ),
+          ],
           restaurantName: action.payload.restaurantName,
         };
       }
-      console.log({newState})
+      console.log({ newState });
       return newState;
     }
     default:
