@@ -4,57 +4,6 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Divider } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 
-const foods = [
-  {
-    title: "Lasagna",
-    description: "With butter lettuce, tomato, and sauce bechamel",
-    price: "$13.50",
-    image: "https://images.pexels.com/photos/4078163/pexels-photo-4078163.jpeg",
-  },
-  {
-    title: "Tandoori Chicken",
-    description: "Amazing Indian dish with tenderloin chicken off the sizzle",
-    price: "$19.20",
-    image: "https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg",
-  },
-  {
-    title: "Lasagna",
-    description: "With butter lettuce, tomato, and sauce bechamel",
-    price: "$13.50",
-    image: "https://images.pexels.com/photos/4078163/pexels-photo-4078163.jpeg",
-  },
-  {
-    title: "Tandoori Chicken",
-    description: "Amazing Indian dish with tenderloin chicken off the sizzle",
-    price: "$19.20",
-    image: "https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg",
-  },
-  {
-    title: "Lasagna",
-    description: "With butter lettuce, tomato, and sauce bechamel",
-    price: "$13.50",
-    image: "https://images.pexels.com/photos/4078163/pexels-photo-4078163.jpeg",
-  },
-  {
-    title: "Tandoori Chicken",
-    description: "Amazing Indian dish with tenderloin chicken off the sizzle",
-    price: "$19.20",
-    image: "https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg",
-  },
-  {
-    title: "Lasagna",
-    description: "With butter lettuce, tomato, and sauce bechamel",
-    price: "$13.50",
-    image: "https://images.pexels.com/photos/4078163/pexels-photo-4078163.jpeg",
-  },
-  {
-    title: "Tandoori Chicken",
-    description: "Amazing Indian dish with tenderloin chicken off the sizzle",
-    price: "$19.20",
-    image: "https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg",
-  },
-];
-
 const styles = StyleSheet.create({
   menuItemsStyle: {
     flexDirection: "row",
@@ -67,7 +16,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MenuItems({ restaurantName }) {
+export default function MenuItems({
+  restaurantName,
+  foods,
+  hideCheckbox,
+  marginLeft,
+}) {
   const dispatch = useDispatch();
 
   const selectItem = (item, checkboxValue) =>
@@ -84,21 +38,25 @@ export default function MenuItems({ restaurantName }) {
     Boolean(cartItems.find((item) => item.title === food.title));
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={{width: "100%"}}>
       {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemsStyle}>
-            <BouncyCheckbox
-              iconStyle={{
-                borderColor: "lightgray",
-                borderRadius: 0,
-              }}
-              fillColor="green"
-              onPress={(checkboxValue) => selectItem(food, checkboxValue)}
-              isChecked={isFoodInCart(food, cartItems)}
-            />
+            {hideCheckbox ? (
+              <></>
+            ) : (
+              <BouncyCheckbox
+                iconStyle={{
+                  borderColor: "lightgray",
+                  borderRadius: 0,
+                }}
+                fillColor="green"
+                onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+                isChecked={isFoodInCart(food, cartItems)}
+              />
+            )}
             <FoodInfo food={food} />
-            <FoodImage food={food} />
+            <FoodImage food={food} marginLeft={marginLeft ? marginLeft : 0} />
           </View>
           <Divider
             width={0.5}
@@ -121,7 +79,7 @@ const FoodInfo = ({ food }) => {
   );
 };
 
-const FoodImage = ({ food }) => {
+const FoodImage = ({ marginLeft, food }) => {
   return (
     <View style={{ flex: 1 }}>
       <Image
@@ -131,6 +89,7 @@ const FoodImage = ({ food }) => {
           height: undefined,
           flex: 1,
           borderRadius: 8,
+          marginLeft: marginLeft,
         }}
       />
     </View>
