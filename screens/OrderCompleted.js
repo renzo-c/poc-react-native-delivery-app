@@ -61,7 +61,7 @@ export default function OrderCompleted() {
           Your order at {restaurantName} has been placed for {totalUSD}
         </Text>
         <ScrollView style={{width: "100%"}}>
-          <MenuItems foods={lastOrder.items} hideCheckbox={true} marginLeft={1}/>
+          <MenuItems foods={lastOrder.items} hideCheckbox={true} />
           <LottieView
             style={{ height: 200, alignSelf: "center", marginBottom: 30 }}
             source={require("../assets/animations/cooking.json")}
